@@ -1,14 +1,4 @@
-# Luke's build of dwm
-
-## FAQ
-
-> What are the bindings?
-
-This is suckless, mmmbud, the source code is the documentation! Check out [config.h](config.h).
-
-Okay, okay, actually I keep a readme in `larbs.mom` for my whole system, including the binds here.
-Press <kbd>super+F1</kbd> to view it in dwm (zathura is required for that binding).
-I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
+# Tiz's build of dwm
 
 ## Patches and features
 
@@ -20,9 +10,12 @@ I haven't kept `man dwm`/`dwm.1` updated though. PRs welcome on that, lol.
 - Windows can be made sticky (<kbd>super+s</kbd>).
 - [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/) hides tags with no windows.
 - [stacker](https://dwm.suckless.org/patches/stacker/): Move windows up the stack manually (<kbd>super-K/J</kbd>).
-- [shiftview](https://dwm.suckless.org/patches/nextprev/): Cycle through tags (<kbd>super+g/;</kbd>).
+- [shiftview](https://dwm.suckless.org/patches/nextprev/): Cycle through tags (<kbd>super+Space/;</kbd>).
 - [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/): Gaps allowed across all layouts.
 - [swallow patch](https://dwm.suckless.org/patches/swallow/): if a program run from a terminal would make it inoperable, it temporarily takes its place to save space.
+- [rio-resise](https://dwm.suckless.org/patches/swallow/): if a program run from a terminal would make it inoperable, it temporarily takes its place to save space.
+- [restoreafterrestart](https://dwm.suckless.org/patches/restoreafterrestart/): restore windows in same tags.
+ [systray](https://dwm.suckless.org/patches/systray/): Systray in the statusbar
 
 
 ## Installation for newbs
