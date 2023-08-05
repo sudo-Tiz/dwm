@@ -1,14 +1,7 @@
 /* Key binding functions */
 static void defaultgaps(const Arg *arg);
 static void incrgaps(const Arg *arg);
-/* static void incrigaps(const Arg *arg); */
-/* static void incrogaps(const Arg *arg); */
-/* static void incrohgaps(const Arg *arg); */
-/* static void incrovgaps(const Arg *arg); */
-/* static void incrihgaps(const Arg *arg); */
-/* static void incrivgaps(const Arg *arg); */
 static void togglegaps(const Arg *arg);
-static void togglesmartgaps(const Arg *arg);
 
 /* Layouts */
 static void bstack(Monitor *m);
@@ -50,13 +43,6 @@ togglegaps(const Arg *arg)
 }
 
 static void
-togglesmartgaps(const Arg *arg)
-{
-	smartgaps = !smartgaps;
-	arrange(NULL);
-}
-
-static void
 defaultgaps(const Arg *arg)
 {
 	setgaps(gappoh, gappov, gappih, gappiv);
@@ -72,72 +58,6 @@ incrgaps(const Arg *arg)
 		selmon->gappiv + arg->i
 	);
 }
-
-/* static void */
-/* incrigaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih + arg->i, */
-/* 		selmon->gappiv + arg->i */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrogaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh + arg->i, */
-/* 		selmon->gappov + arg->i, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrohgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh + arg->i, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrovgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov + arg->i, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrihgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih + arg->i, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrivgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv + arg->i */
-/* 	); */
-/* } */
 
 static void
 getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc)
