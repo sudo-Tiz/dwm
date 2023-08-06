@@ -163,6 +163,9 @@ static Key
     STACKKEYS(MODKEY, focus) STACKKEYS(MODKEY|ShiftMask, push)
     /* J and K are automatically bound above in STACKEYS */
 
+    /* Following comment is used to parse the file for the documentation */
+/* BEGINNING OF THE DOC */
+
     /* [LAYOUTS] */
     {MODKEY,                  XK_t, setlayout, {.v = &layouts[0]}},                          /* tile */
     {MODKEY|ShiftMask,        XK_t, setlayout, {.v = &layouts[1]}},                          /* bstack */
@@ -349,7 +352,7 @@ static Key
     {MODKEY|ShiftMask,        XK_n, spawn, SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks")},
 
 /* [FUNCTION KEY] */
-    {MODKEY,                  XK_F1, spawn, SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura " "-")}, 
+    {MODKEY,                  XK_F1, spawn, SHCMD("dmenukeys")},
     {MODKEY,                  XK_F2, spawn, SHCMD("switcheme")}, 
     {MODKEY,                  XK_F3, spawn, SHCMD("displayselect")},
     {MODKEY,                  XK_F4, spawn, SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)")},
@@ -439,7 +442,7 @@ static Key
     {ShiftMask,               XK_Pause, spawn, SHCMD("notify-send 'Shift Pause (no modkey)'")},
     {MODKEY|ControlMask,      XK_Pause, spawn, SHCMD("notify-send 'Control Pause'")},
     {ControlMask,             XK_Pause, spawn, SHCMD("notify-send 'Control Pause (no modkey)'")},
-
+/* END OF THE DOC */
 };
 
 /* button definitions */

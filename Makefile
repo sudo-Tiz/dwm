@@ -43,6 +43,8 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/share/dwm
 	cp -f larbs.mom ${DESTDIR}${PREFIX}/share/dwm
 	chmod 644 ${DESTDIR}${PREFIX}/share/dwm/larbs.mom
+	[ -d ${GETKEYSDIR} ] && awk '/^\/\* BEGINNING OF THE DOC \*\//,/^\/\* END OF THE DOC \*\// { print }' config.h > ${GETKEYSDIR}/dwm.h
+	chown ${USER}:${GROUP} ${GETKEYSDIR}/dwm.h
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
