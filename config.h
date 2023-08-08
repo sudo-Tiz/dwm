@@ -52,12 +52,16 @@ typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL};
-const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL};
+const char *spcmd0[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL};
+const char *spcmd1[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL};
+const char *spcmd2[] = {TERMINAL, "-n", "spvim", "-g", "120x34", "-e", "vim", NULL};
+const char *spcmd3[] = {TERMINAL, "-n", "sptime", "-f", "monospace:size=26", "-g", "9x1", "-e", "watch", "-t", "-n", "1", "date", "+%H:%M:%S", NULL};
 static Sp scratchpads[] = {
     /* name          cmd  */
-    {"spterm", spcmd1},
-    {"spcalc", spcmd2},
+    {"spterm", spcmd0},
+    {"spcalc", spcmd1},
+    {"spvim", spcmd2},
+    {"sptime", spcmd3},
 };
 
 /* tagging */
@@ -74,9 +78,11 @@ static const Rule rules[] = {
     {TERMCLASS, NULL,         NULL,                   0,          0,          1,          0,          -1},
     {NULL,      NULL,         "Event Tester",         0,          0,          0,          1,          -1},
     {TERMCLASS, "bg",         NULL,                   1 << 7,     0,          1,          0,          -1},
-    {NULL,      NULL,         "zbar barcode reader",  0,          0,          1,          1,          -1},
+    {NULL,      NULL,         "zbar barcode reader",  0,          0,          0,          1,          -1},
     {NULL,      "spterm",     NULL,                   SPTAG(0),   1,          1,          0,          -1},
     {NULL,      "spcalc",     NULL,                   SPTAG(1),   1,          1,          0,          -1},
+    {NULL,      "spvim",      NULL,                   SPTAG(2),   1,          1,          0,          -1},
+    {NULL,      "sptime",     NULL,                   SPTAG(3),   1,          1,          0,          -1},
 };
 
 /* layout(s) */
@@ -260,11 +266,20 @@ static Key
     /* Hibernate */
     {0,                       XF86XK_Sleep, spawn, SHCMD("systemctl hibernate -i")},
 
+    /* [SCRATCHPADS] */
+    /* Open/close terminal in scratchpad */
+    {MODKEY|ShiftMask,        XK_Return, togglescratch, {.ui = 0}},
+    /* Open/close calc in scratchpad */
+    {MODKEY,                  XK_KP_Multiply, togglescratch, {.ui = 1}},
+    /* Open/close vim in scratchpad */
+    {MODKEY|ShiftMask,        XK_v, togglescratch, {.ui = 2}},
+    /* Open/close timer in scratchpad */
+    {MODKEY,                  XK_KP_Divide, togglescratch, {.ui = 3}},
+
+
     /* [TERMINAL] */
     /* Launch a terminal */
     {MODKEY,                  XK_Return, spawn, {.v = termcmd}},
-    /* Open/close terminal in scratchpad */
-    {MODKEY|ShiftMask,        XK_Return, togglescratch, {.ui = 0}},
     /* Spawn a new floating terminal, like Plan9's rio (Rio-Resize patch) */
     {MODKEY|ControlMask,      XK_Return, riospawn, {.v = termcmd}},
 
@@ -322,7 +337,7 @@ static Key
     /* Launch System action dmenu */
     {MODKEY,                  XK_BackSpace, spawn, SHCMD("sysact")},
     /* Launch Monitoring dmenu */
-    {MODKEY|ShiftMask,        XK_s, spawn, SHCMD("dmenumsi")},
+    {MODKEY,                  XK_x, spawn, SHCMD("dmenumsi")},
     /* Launch Password dmenu */
     {MODKEY|ShiftMask,        XK_d, spawn, SHCMD("neopassmenu")},
     /* Launch Clipmenu  */
@@ -340,13 +355,14 @@ static Key
     /* {MODKEY|ShiftMask,              XK_w,   spawn, SHCMD("networkmanager_dmenu") }, */
 
     /* [APP] */
+    {MODKEY,                  XK_g, spawn, SHCMD("steam")},
     {MODKEY,                  XK_e, spawn, SHCMD("thunderbird")},
     {MODKEY|ShiftMask,        XK_e, spawn, SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook")},
     {MODKEY,                  XK_w, spawn, SHCMD(BROWSER)},
     {MODKEY|ShiftMask,        XK_w, spawn, SHCMD("chromium")},
-    {MODKEY,                  XK_o, spawn, SHCMD("brave")},
-    {MODKEY|ShiftMask,        XK_o, spawn, SHCMD("signal-desktop")},
-    {MODKEY,                  XK_x, spawn, SHCMD(TERMINAL "-e nvim")},
+    {MODKEY|ControlMask,      XK_w, spawn, SHCMD("brave")},
+    {MODKEY,                  XK_o, spawn, SHCMD("signal-desktop")},
+    {MODKEY,                  XK_v, spawn, SHCMD(TERMINAL "-e nvim")},
     {MODKEY|ShiftMask,        XK_x, spawn, SHCMD(TERMINAL "-e htop")},
     {MODKEY,                  XK_r, spawn, SHCMD(TERMINAL "-e lfub")},
     {MODKEY|ShiftMask,        XK_n, spawn, SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks")},
@@ -366,8 +382,6 @@ static Key
     {MODKEY,                  XK_F12, spawn, SHCMD("remaps")}, // amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)
 
     /* [UNUSED] */
-    {MODKEY,                  XK_z, spawn, SHCMD("notify-send 'z'")},
-    {MODKEY|ShiftMask,        XK_z, spawn, SHCMD("notify-send 'Shift z'")},
     {MODKEY|ControlMask,      XK_z, spawn, SHCMD("notify-send 'Control z'")},
     {MODKEY|ControlMask,      XK_e, spawn, SHCMD("notify-send 'Control e'")},
     {MODKEY|ControlMask,      XK_r, spawn, SHCMD("notify-send 'Control r'")},
@@ -375,12 +389,12 @@ static Key
     {MODKEY|ControlMask,      XK_y, spawn, SHCMD("notify-send 'Control y'")},
     {MODKEY|ControlMask,      XK_u, spawn, SHCMD("notify-send 'Control u'")},
     {MODKEY|ControlMask,      XK_i, spawn, SHCMD("notify-send 'Control i'")},
+    {MODKEY|ShiftMask,        XK_o, spawn, SHCMD("notify-send 'Control o'")},
     {MODKEY|ControlMask,      XK_o, spawn, SHCMD("notify-send 'Control o'")},
     {MODKEY|ControlMask,      XK_p, spawn, SHCMD("notify-send 'Control p'")},
     {MODKEY|ControlMask,      XK_s, spawn, SHCMD("notify-send 'Control s'")},
     {MODKEY|ControlMask,      XK_d, spawn, SHCMD("notify-send 'Control d'")},
     {MODKEY|ControlMask,      XK_f, spawn, SHCMD("notify-send 'Control f'")},
-    {MODKEY,                  XK_g, spawn, SHCMD("notify-send 'g'")},
     {MODKEY|ShiftMask,        XK_g, spawn, SHCMD("notify-send 'Shift g'")},
     {MODKEY|ControlMask,      XK_g, spawn, SHCMD("notify-send 'Control g'")},
     {MODKEY|ControlMask,      XK_h, spawn, SHCMD("notify-send 'Control h'")},
@@ -388,50 +402,45 @@ static Key
     {MODKEY|ControlMask,      XK_k, spawn, SHCMD("notify-send 'Control k'")},
     {MODKEY|ControlMask,      XK_l, spawn, SHCMD("notify-send 'Control l'")},
     {MODKEY|ControlMask,      XK_m, spawn, SHCMD("notify-send 'Control m'")},
-    {MODKEY|ControlMask,      XK_w, spawn, SHCMD("notify-send 'Control w'")},
     {MODKEY|ControlMask,      XK_x, spawn, SHCMD("notify-send 'Control x'")},
     {MODKEY|ControlMask,      XK_c, spawn, SHCMD("notify-send 'Control c'")},
-    {MODKEY,                  XK_v, spawn, SHCMD("notify-send 'v'")},
-    {MODKEY|ShiftMask,        XK_v, spawn, SHCMD("notify-send 'Shift v'")},
     {MODKEY|ControlMask,      XK_v, spawn, SHCMD("notify-send 'Control v'")},
     {MODKEY|ControlMask,      XK_b, spawn, SHCMD("notify-send 'Control b'")},
     {MODKEY|ControlMask,      XK_n, spawn, SHCMD("notify-send 'Control n'")},
-    {MODKEY|ControlMask,      XK_KP_Multiply, spawn, SHCMD("notify-send 'Control KP_Multiply'")},
-    {MODKEY|ControlMask,      XK_KP_Divide, spawn, SHCMD("notify-send 'Control KP_Divide'")},
     {MODKEY|ControlMask,      XK_KP_Add, spawn, SHCMD("notify-send 'Control KP_Add'")},
     {MODKEY|ControlMask,      XK_KP_Subtract, spawn, SHCMD("notify-send 'Control KP_Substract'")},
     {MODKEY|ControlMask,      XK_KP_Enter, spawn, SHCMD("notify-send 'Control KP_Enter'")},
     {MODKEY|ControlMask,      XK_Insert, spawn, SHCMD("notify-send 'Control Insert'")},
     {MODKEY|ControlMask,      XK_asterisk, spawn, SHCMD("notify-send 'Control asterisk'")},
-    {MODKEY|ControlMask,      XK_parenright, spawn, SHCMD("notify-send 'Control parenright'")},
-    {MODKEY|ControlMask,      XK_equal, spawn, SHCMD("notify-send 'Control equal'")},
-    {MODKEY|ControlMask,      XK_dead_circumflex, spawn, SHCMD("notify-send 'Control dead_circumflex'")},
-    {MODKEY|ControlMask,      XK_dollar, spawn, SHCMD("notify-send 'Control dollar'")},
-    {MODKEY|ControlMask,      XK_ugrave, spawn, SHCMD("notify-send 'Control ugrave'")},
     {MODKEY|ControlMask,      XK_comma, spawn, SHCMD("notify-send 'Control comma'")},
-    {MODKEY|ControlMask,      XK_semicolon, spawn, SHCMD("notify-send 'Control semicolon'")},
-    {MODKEY|ControlMask,      XK_colon, spawn, SHCMD("notify-send 'Control colon'")},
-    {MODKEY|ControlMask,      XK_exclam, spawn, SHCMD("notify-send 'Control exclam'")},
-    {MODKEY,                  XK_KP_Multiply, spawn, SHCMD("notify-send 'KP_Multiply'")},
     {MODKEY|ShiftMask,        XK_KP_Multiply, spawn, SHCMD("notify-send 'Shift KP_Multiply'")},
-    {MODKEY,                  XK_KP_Divide, spawn, SHCMD("notify-send 'KP_Divide'")},
+    {MODKEY|ControlMask,      XK_KP_Multiply, spawn, SHCMD("notify-send 'Control KP_Multiply'")},
     {MODKEY|ShiftMask,        XK_KP_Divide, spawn, SHCMD("notify-send 'Shift KP_Divide'")},
+    {MODKEY|ControlMask,      XK_KP_Divide, spawn, SHCMD("notify-send 'Control KP_Divide'")},
     {MODKEY,                  XK_parenright, spawn, SHCMD("notify-send ')'")},
     {MODKEY|ShiftMask,        XK_parenright, spawn, SHCMD("notify-send '°'")},
+    {MODKEY|ControlMask,      XK_parenright, spawn, SHCMD("notify-send 'Control parenright'")},
     {MODKEY,                  XK_equal, spawn, SHCMD("notify-send '='")},
     {MODKEY|ShiftMask,        XK_equal, spawn, SHCMD("notify-send '+'")},
+    {MODKEY|ControlMask,      XK_equal, spawn, SHCMD("notify-send 'Control equal'")},
     {MODKEY,                  XK_dead_circumflex, spawn, SHCMD("notify-send '^'")},
     {MODKEY|ShiftMask,        XK_dead_circumflex, spawn, SHCMD("notify-send '¨'")},
+    {MODKEY|ControlMask,      XK_dead_circumflex, spawn, SHCMD("notify-send 'Control dead_circumflex'")},
     {MODKEY,                  XK_dollar, spawn, SHCMD("notify-send '$'")},
     {MODKEY|ShiftMask,        XK_dollar, spawn, SHCMD("notify-send '£'")},
+    {MODKEY|ControlMask,      XK_dollar, spawn, SHCMD("notify-send 'Control dollar'")},
     {MODKEY,                  XK_ugrave, spawn, SHCMD("notify-send 'ù'")},
     {MODKEY|ShiftMask,        XK_ugrave, spawn, SHCMD("notify-send '%'")},
+    {MODKEY|ControlMask,      XK_ugrave, spawn, SHCMD("notify-send 'Control ugrave'")},
     {MODKEY,                  XK_semicolon, spawn, SHCMD("notify-send ';'")},
     {MODKEY|ShiftMask,        XK_semicolon, spawn, SHCMD("notify-send '.'")},
+    {MODKEY|ControlMask,      XK_semicolon, spawn, SHCMD("notify-send 'Control semicolon'")},
     {MODKEY,                  XK_colon, spawn, SHCMD("notify-send ':'")},
     {MODKEY|ShiftMask,        XK_colon, spawn, SHCMD("notify-send '/'")},
+    {MODKEY|ControlMask,      XK_colon, spawn, SHCMD("notify-send 'Control colon'")},
     {MODKEY,                  XK_exclam, spawn, SHCMD("notify-send '!'")},
     {MODKEY|ShiftMask,        XK_exclam, spawn, SHCMD("notify-send '§'")},
+    {MODKEY|ControlMask,      XK_exclam, spawn, SHCMD("notify-send 'Control exclam'")},
     {MODKEY,                  XK_Scroll_Lock, spawn, SHCMD("notify-send 'Scroll_lock'")},
     {MODKEY|ShiftMask,        XK_Scroll_Lock, spawn, SHCMD("notify-send 'Shift Scroll_lock'")},
     {ShiftMask,               XK_Scroll_Lock, spawn, SHCMD("notify-send 'Shift Scroll_lock (no modkey)'")},
