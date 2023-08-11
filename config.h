@@ -329,7 +329,7 @@ static Key
     {MODKEY,                  XK_KP_Subtract, spawn, SHCMD("sudo isw -b on")},
     {MODKEY|ShiftMask,        XK_KP_Subtract, spawn, SHCMD("sudo isw -b off")},
     /* Toggle Bluetooth service */
-    {MODKEY|ShiftMask,        XK_b, spawn, SHCMD("toggle_bluetooth")},
+    {MODKEY|ShiftMask,        XK_b, spawn, SHCMD("toggle-bluetooth")},
 
     /* [LAUNCHER] */
     /* Launch dmenu */
