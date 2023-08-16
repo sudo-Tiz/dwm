@@ -2570,9 +2570,12 @@ togglebar(const Arg *arg)
 	resizebarwin(selmon);
 	if (showsystray) {
 		XWindowChanges wc;
-		if (!selmon->showbar)
+		if (!selmon->showbar) {
+      system("killall -q dwmblocks;");
 			wc.y = -bh;
+    }
 		else if (selmon->showbar) {
+	    system("killall -q dwmblocks; dwmblocks &");
 			wc.y = 0;
 			if (!selmon->topbar)
 				wc.y = selmon->mh - bh;
