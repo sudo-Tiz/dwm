@@ -184,6 +184,7 @@ static Key
 
     /* [TAGS] */
     /* Assign keys to tags ("containers") */
+    /* AZERTY */
     TAGKEYS(XK_ampersand, 0)
     TAGKEYS(XK_eacute, 1)
     TAGKEYS(XK_quotedbl, 2)
@@ -194,6 +195,21 @@ static Key
     TAGKEYS(XK_underscore, 7)
     TAGKEYS(XK_ccedilla,8)
     {MODKEY,                  XK_agrave, view, {.ui = ~0}},
+
+    /* QUERTY */
+    TAGKEYS(XK_1, 0)
+    TAGKEYS(XK_2, 1)
+    TAGKEYS(XK_3, 2)
+    TAGKEYS(XK_4, 3)
+    TAGKEYS(XK_5, 4)
+    TAGKEYS(XK_6, 5)
+    TAGKEYS(XK_7, 6)
+    TAGKEYS(XK_8, 7)
+    TAGKEYS(XK_9,8)
+    {MODKEY,                  XK_0, view, {.ui = ~0}},
+
+
+
     /* {MODKEY|ShiftMask,        XK_agrave, tag, {.ui = ~0}}, */
     /* Switch between active tag and last opened tag */
     {MODKEY,                  XK_Tab, view, {0}},
