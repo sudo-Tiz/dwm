@@ -396,6 +396,7 @@ static Key
     {MODKEY,                  XK_F10, spawn, SHCMD("unmounter")},
     {MODKEY,                  XK_F11, spawn, SHCMD("mpv --untimed --no-cache --no-osc " "--no-input-default-bindings " "--profile=low-latency --input-conf=/dev/null " "--title=webcam $(ls " "/dev/video[0,2,4,6,8] | tail -n 1) || notify-send -u critical 'Webcam' 'Could not open webcam!'")},
     {MODKEY,                  XK_F12, spawn, SHCMD("remaps")}, // amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)
+    {MODKEY|ShiftMask,        XK_F12, spawn, SHCMD("switchlayout")}, // amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)
 
     /* [UNUSED] */
     {MODKEY|ControlMask,      XK_z, spawn, SHCMD("notify-send 'Control z'")},
