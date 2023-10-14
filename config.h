@@ -311,9 +311,9 @@ static Key
     /* Toggle volume */
     {0,                       XF86XK_AudioMute, spawn, SHCMD( "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof " "dwmblocks)")}, // amixer -qD pulse sset Master toggle; kill -44 $(pidof dwmblocks)
     /* Increase volume */
-    {0,                       XF86XK_AudioRaiseVolume, spawn, SHCMD( "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+; kill -44 $(pidof " "dwmblocks)")}, // amixer -qD pulse sset Master 5%+; kill -44 $(pidof dwmblocks)
+    {0,                       XF86XK_AudioRaiseVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 0%- && wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+; kill -44 $(pidof dwmblocks)")}, // amixer -qD pulse sset Master 5%+; kill -44 $(pidof dwmblocks)
     /* Decrease volume */
-    {0,                       XF86XK_AudioLowerVolume, spawn, SHCMD( "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-; kill -44 $(pidof " "dwmblocks)")}, // amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)
+    {0,                       XF86XK_AudioLowerVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 0%+ && wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-; kill -44 $(pidof dwmblocks)")}, // amixer -qD pulse sset Master 5%-; kill -44 $(pidof dwmblocks)
 
 
     /* [VIDEO] */
