@@ -243,8 +243,12 @@ static Key
     {MODKEY|ShiftMask,        XK_m, incnmaster, {.i = -1}},
     /* Kill a window */
     {MODKEY,                  XK_q, killclient, {0}},
-    /* Xkill a window */
+    /* xkill a window */
     {MODKEY|ShiftMask,        XK_q, spawn, SHCMD("xkill")},
+    /* pause a window */
+    {MODKEY,                  XK_equal, spawn, SHCMD("xpause p")},
+    /* resume a window */
+    {MODKEY|ShiftMask,        XK_equal, spawn, SHCMD("xpause r")},
     /* Resize window left (make it smaller)*/
     {MODKEY,                  XK_h, setmfact, {.f = -0.05}},
     /* Resize window right (make it bigger) */
@@ -437,8 +441,6 @@ static Key
     {MODKEY,                  XK_parenright, spawn, SHCMD("notify-send ')'")},
     {MODKEY|ShiftMask,        XK_parenright, spawn, SHCMD("notify-send '°'")},
     {MODKEY|ControlMask,      XK_parenright, spawn, SHCMD("notify-send 'Control parenright'")},
-    {MODKEY,                  XK_equal, spawn, SHCMD("notify-send '='")},
-    {MODKEY|ShiftMask,        XK_equal, spawn, SHCMD("notify-send '+'")},
     {MODKEY|ControlMask,      XK_equal, spawn, SHCMD("notify-send 'Control equal'")},
     {MODKEY,                  XK_dead_circumflex, spawn, SHCMD("notify-send '^'")},
     {MODKEY|ShiftMask,        XK_dead_circumflex, spawn, SHCMD("notify-send '¨'")},
