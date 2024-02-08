@@ -371,7 +371,7 @@ static Key
     /* launch Bluetooth dmenu */
     {MODKEY,                  XK_b, spawn, SHCMD("dmenu-bluetooth")},
     /* Launch NetworkManager dmenu */
-    /* {MODKEY|ShiftMask,        XK_w, spawn, SHCMD(TERMINAL "-e sudo nmtui")}, */
+    /* {MODKEY|ShiftMask,        XK_w, spawn, SHCMD(TERMINAL " -e sudo nmtui")}, */
     /* {MODKEY|ShiftMask,              XK_w,   spawn, SHCMD("networkmanager_dmenu") }, */
 
     /* [APP] */
@@ -382,9 +382,9 @@ static Key
     {MODKEY|ShiftMask,        XK_w, spawn, SHCMD("chromium")},
     {MODKEY|ControlMask,      XK_w, spawn, SHCMD("brave")},
     {MODKEY,                  XK_o, spawn, SHCMD("signal-desktop")},
-    {MODKEY,                  XK_v, spawn, SHCMD(TERMINAL "-e nvim")},
-    {MODKEY|ShiftMask,        XK_x, spawn, SHCMD(TERMINAL "-e htop")},
-    {MODKEY,                  XK_r, spawn, SHCMD(TERMINAL "-e lfub")},
+    {MODKEY,                  XK_v, spawn, SHCMD(TERMINAL " -e nvim")},
+    {MODKEY|ShiftMask,        XK_x, spawn, SHCMD(TERMINAL " -e htop")},
+    {MODKEY,                  XK_r, spawn, SHCMD(TERMINAL " -e lfub")},
     {MODKEY|ShiftMask,        XK_n, spawn, SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks")},
 
 /* [FUNCTION KEY] */
