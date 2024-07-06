@@ -44,7 +44,8 @@ install: all
 	chown ${USER}:${GROUP} ${GETKEYSDIR}/dwm.h
 
 uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
-		${DESTDIR}${MANPREFIX}/man1/dwm.1
+	rm -f ${DESTDIR}${PREFIX}/bin/dwm \
+		${DESTDIR}${MANPREFIX}/man1/dwm.1 \
+		${GETKEYSDIR}/st.h
 
 .PHONY: all options clean dist install uninstall
