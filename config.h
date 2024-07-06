@@ -54,7 +54,7 @@ typedef struct {
 } Sp;
 const char *spcmd0[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL};
 const char *spcmd1[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL};
-const char *spcmd2[] = {TERMINAL, "-n", "spvim", "-g", "120x34", "-e", "vim", NULL};
+const char *spcmd2[] = {TERMINAL, "-n", "spvim", "-g", "120x34", "-e", "nvim", NULL};
 const char *spcmd3[] = {TERMINAL, "-n", "sptime", "-f", "monospace:size=26", "-g", "9x1", "-e", "watch", "-t", "-n", "1", "date", "+%H:%M:%S", NULL};
 static Sp scratchpads[] = {
     /* name          cmd  */
@@ -376,6 +376,7 @@ static Key
 
     /* [APP] */
     {MODKEY,                  XK_g, spawn, SHCMD("steam")},
+    {MODKEY|ShiftMask,        XK_g, spawn, SHCMD("killall steam")},
     {MODKEY,                  XK_e, spawn, SHCMD("thunderbird")},
     {MODKEY|ShiftMask,        XK_e, spawn, SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook")},
     {MODKEY,                  XK_w, spawn, SHCMD(BROWSER)},
@@ -416,7 +417,6 @@ static Key
     {MODKEY|ControlMask,      XK_s, spawn, SHCMD("notify-send 'Control s'")},
     {MODKEY|ControlMask,      XK_d, spawn, SHCMD("notify-send 'Control d'")},
     {MODKEY|ControlMask,      XK_f, spawn, SHCMD("notify-send 'Control f'")},
-    {MODKEY|ShiftMask,        XK_g, spawn, SHCMD("notify-send 'Shift g'")},
     {MODKEY|ControlMask,      XK_g, spawn, SHCMD("notify-send 'Control g'")},
     {MODKEY|ControlMask,      XK_h, spawn, SHCMD("notify-send 'Control h'")},
     {MODKEY|ControlMask,      XK_j, spawn, SHCMD("notify-send 'Control j'")},
