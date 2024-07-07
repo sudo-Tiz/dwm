@@ -300,8 +300,10 @@ static Key
     /* [TERMINAL] */
     /* Launch a terminal */
     {MODKEY,                  XK_Return, spawn, {.v = termcmd}},
+    {MODKEY,                  XK_x, spawn, {.v = termcmd}},
     /* Spawn a new floating terminal, like Plan9's rio (Rio-Resize patch) */
     {MODKEY|ControlMask,      XK_Return, riospawn, {.v = termcmd}},
+    {MODKEY|ControlMask,      XK_x, riospawn, {.v = termcmd}},
 
     /* [MUSIC] */ 
     /* Play/Pause*/
@@ -357,7 +359,7 @@ static Key
     /* Launch System action dmenu */
     {MODKEY,                  XK_BackSpace, spawn, SHCMD("sysact")},
     /* Launch Monitoring dmenu */
-    {MODKEY,                  XK_x, spawn, SHCMD("dmenumsi")},
+    {MODKEY,                  XK_dollar, spawn, SHCMD("dmenumsi")},
     /* Launch Password dmenu */
     {MODKEY|ShiftMask,        XK_d, spawn, SHCMD("neopassmenu")},
     /* Launch Clipmenu  */
@@ -384,7 +386,6 @@ static Key
     {MODKEY|ControlMask,      XK_w, spawn, SHCMD("brave")},
     {MODKEY,                  XK_o, spawn, SHCMD("signal-desktop")},
     {MODKEY,                  XK_v, spawn, SHCMD(TERMINAL " -e nvim")},
-    {MODKEY|ShiftMask,        XK_x, spawn, SHCMD(TERMINAL " -e htop")},
     {MODKEY,                  XK_r, spawn, SHCMD(TERMINAL " -e lfub")},
     {MODKEY|ShiftMask,        XK_n, spawn, SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks")},
 
@@ -424,6 +425,7 @@ static Key
     {MODKEY|ControlMask,      XK_l, spawn, SHCMD("notify-send 'Control l'")},
     {MODKEY|ControlMask,      XK_m, spawn, SHCMD("notify-send 'Control m'")},
     {MODKEY|ControlMask,      XK_x, spawn, SHCMD("notify-send 'Control x'")},
+    {MODKEY|ShiftMask,        XK_x, spawn, SHCMD("notify-send 'Shift x'")},
     {MODKEY|ControlMask,      XK_c, spawn, SHCMD("notify-send 'Control c'")},
     {MODKEY|ControlMask,      XK_v, spawn, SHCMD("notify-send 'Control v'")},
     {MODKEY|ControlMask,      XK_b, spawn, SHCMD("notify-send 'Control b'")},
@@ -445,7 +447,6 @@ static Key
     {MODKEY,                  XK_dead_circumflex, spawn, SHCMD("notify-send '^'")},
     {MODKEY|ShiftMask,        XK_dead_circumflex, spawn, SHCMD("notify-send '¨'")},
     {MODKEY|ControlMask,      XK_dead_circumflex, spawn, SHCMD("notify-send 'Control dead_circumflex'")},
-    {MODKEY,                  XK_dollar, spawn, SHCMD("notify-send '$'")},
     {MODKEY|ShiftMask,        XK_dollar, spawn, SHCMD("notify-send '£'")},
     {MODKEY|ControlMask,      XK_dollar, spawn, SHCMD("notify-send 'Control dollar'")},
     {MODKEY,                  XK_ugrave, spawn, SHCMD("notify-send 'ù'")},
