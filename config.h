@@ -358,6 +358,7 @@ static Key
     {MODKEY,                  XK_d, spawn, SHCMD("dmenu_run")},
     /* Launch System action dmenu */
     {MODKEY,                  XK_BackSpace, spawn, SHCMD("sysact")},
+    {MODKEY|ShiftMask,       XK_x, spawn, SHCMD("sysact")},
     /* Launch Monitoring dmenu */
     {MODKEY,                  XK_dollar, spawn, SHCMD("dmenumsi")},
     /* Launch Password dmenu */
