@@ -383,7 +383,7 @@ static Key
     {MODKEY,                  XK_e, spawn, SHCMD("thunderbird")},
     {MODKEY|ShiftMask,        XK_e, spawn, SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook")},
     {MODKEY,                  XK_w, spawn, SHCMD(BROWSER)},
-    {MODKEY|ShiftMask,        XK_w, spawn, SHCMD("chromium")},
+    {MODKEY|ShiftMask,        XK_w, spawn, SHCMD("mullvad-browser")},
     {MODKEY|ControlMask,      XK_w, spawn, SHCMD("brave")},
     {MODKEY,                  XK_o, spawn, SHCMD("signal-desktop")},
     {MODKEY,                  XK_v, spawn, SHCMD(TERMINAL " -e nvim")},
