@@ -3,7 +3,7 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "firefox"
+#define BROWSER "librewolf"
 #define SESSION_FILE "/tmp/dwm-session"
 
 /* Appearance */
